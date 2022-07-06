@@ -123,11 +123,15 @@ namespace TicTacToe {
                 case ConsoleKey.Spacebar:
                     if(!gameOver) {
                         if(turn == 0) {
-                            shapeLocations[cursorY, cursorX] = 1;
-                            turn = 1;
+                            if(shapeLocations[cursorY, cursorX] == 0) {
+                                shapeLocations[cursorY, cursorX] = 1;
+                                turn = 1;
+                            }
                         } else {
-                            shapeLocations[cursorY, cursorX] = 2;
-                            turn = 0;
+                            if(shapeLocations[cursorY, cursorX] == 0) {
+                                shapeLocations[cursorY, cursorX] = 2;
+                                turn = 0;
+                            }
                         }
                     }
 					break;
