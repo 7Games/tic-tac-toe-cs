@@ -68,6 +68,14 @@ namespace TicTacToe {
         static void Main(string[] args) {
             Console.Clear();
             while(isRunning){
+                string turnString = "";
+                if(turn == 0) {
+                    turnString = "Crosses";
+                } else if(turn == 1) {
+                    turnString = "Circles";
+                }
+
+
                 Console.SetCursorPosition(0, 0);
                 //Turn the board into a char array
                 char[] screen = board.ToCharArray();
@@ -93,11 +101,24 @@ namespace TicTacToe {
                 
                 //Draws the text relevent to if the game is over
                 if(!gameOver) {
-                    Console.WriteLine("Use [ARROW KEYS] to move the cursor\nand press [SPACE] to place your token");
+                    Console.Write("Use [ARROW KEYS] to move the cursor\nand press [SPACE] to place your token.\n");
+                    if(turnString=="Crosses")
+                        Console.ForegroundColor = xColor;
+                    else if(turnString=="Circles")
+                        Console.ForegroundColor = oColor;
+                    Console.Write(turnString);
+                    Console.ForegroundColor = boardColor;
+                    Console.Write(" turn.\n");
                 } else {
                     Console.Clear();
                     drawScreen(screen);
-                    Console.WriteLine(winner + " wins!\nPress [R] to restart.");
+                    if(winner=="Cross")
+                        Console.ForegroundColor = xColor;
+                    else if(winner=="Circle")
+                        Console.ForegroundColor = oColor;
+                    Console.Write(winner);
+                    Console.ForegroundColor = boardColor;
+                    Console.WriteLine(" wins!\nPress [R] to restart.");
                 }
                 
                 //Get input from Console
