@@ -23,6 +23,12 @@ namespace TicTacToe {
         //0 = cross;    1 = circle;
         static int turn = 0;
 
+        //ConsoleColor
+        static ConsoleColor xColor = ConsoleColor.Red;
+        static ConsoleColor oColor = ConsoleColor.Green;
+        static ConsoleColor boardColor = ConsoleColor.White;
+        static ConsoleColor cursorColor = ConsoleColor.Yellow;
+
         static void Main(string[] args) {
             Console.Clear();
             while(isRunning){
@@ -51,13 +57,29 @@ namespace TicTacToe {
                     screen.Append(info[i]);
                 }
 
+                //Draw the screen
                 for(int i = 0; i<screen.Length; i++) {
-                    Console.ForegroundColor = ConsoleColor.White;
+                    //Sets the board color
+                    Console.ForegroundColor = boardColor;
+                    //Sees if there any 'x' or 'o' in the board and-
+                    //- if there are then colors them
                     if(screen[i] == 'x') {
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = xColor;
                     }
                     if(screen[i] == 'o') {
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = oColor;
+                    }
+
+                    //Sets the cursor color depending on if they-
+                    //- are on an 'x', 'o' or nothing
+                    if(screen[i] == '#') {
+                        Console.ForegroundColor = cursorColor;
+                        if(shapeLocations[cursorY, cursorX] == 1) {
+                            Console.ForegroundColor = xColor;
+                        }
+                        if(shapeLocations[cursorY, cursorX] == 2) {
+                            Console.ForegroundColor = oColor;
+                        }
                     }
                     Console.Write(screen[i]);
                 }
@@ -76,6 +98,15 @@ namespace TicTacToe {
 				case ConsoleKey.LeftArrow:
                     cursorX-=1;
 					break;
+                case ConsoleKey.Spacebar:
+                    if(turn == 0) {
+                        shapeLocations[cursorY, cursorX] = 1;
+                        turn = 1;
+                    } else {
+                        shapeLocations[cursorY, cursorX] = 2;
+                        turn = 0;
+                    }
+					break; 
                 }
 
                 if(cursorX<0) {
