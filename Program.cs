@@ -160,6 +160,18 @@ namespace TicTacToe {
                     cursorY = 2;
                 }
 
+                //Checks to see if there are any valid spaces
+                int numOfBlank = 0;
+                for(int i = 0; i < 3; i++) {
+                    for(int j = 0; j < 3; j++) {
+                        if(shapeLocations[i, j] == 0)
+                            numOfBlank++;
+                    }
+                }
+                if(numOfBlank == 0) {
+                    gameOver = true;
+                    winner = "No one"; 
+                }
 
                 //===============================================
                 //=================Line Detector=================
